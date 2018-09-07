@@ -28,7 +28,44 @@ print (a)
 
 #exercise 4
 def read_csv_data_to_ndarray(path):
-    data = np.genfromtxt(path,dtype = "|S20", skip_header=1, delimiter = "\t", usecols = np.arange(0,13))
-    print(data)
+    data = np.genfromtxt(path, dtype = "|S100", skip_header=1, delimiter = ",", usecols = np.arange(0,23))
+    return data
 
-read_csv_data_to_ndarray('./ipl_matches_small.txt')
+data = read_csv_data_to_ndarray('./ipl_matches_small.csv')
+print (data)
+
+#exercise 5
+def get_unique_matches_count(data):
+    match_code = data[:,0]
+    print (match_code)
+    unique_matches = set(match_code)
+    count_unique_matches = len(unique_matches)
+    return count_unique_matches
+
+unique_match_count = get_unique_matches_count(data)
+print (unique_match_count)
+
+#exercise 6
+def get_unique_teams_set(data):
+    team1_list = list(set(data[:,3]))
+    team2_list = list(set(data[:,4]))
+    team_list = list(set(team1_list + team2_list))
+    print (team1_list)
+    print (team2_list)
+    return team_list
+
+unique_teams = get_unique_teams_set(data)
+print (unique_teams)
+
+#exercise 7
+def get_total_extras(data):
+    extras = list((data[:,17]))
+    print (extras)
+    total_extras = 0
+    for i in range(0,len(extras)):
+        total_extras += int(extras[i])
+    return (total_extras)
+
+
+total_extras = get_total_extras(data)
+print (total_extras)
